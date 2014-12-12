@@ -30,7 +30,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace System.Linq
+namespace UniLinq
 {
 	class QuickSort<TElement>
 	{

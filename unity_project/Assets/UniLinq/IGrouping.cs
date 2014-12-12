@@ -28,7 +28,7 @@
 //
 using System.Collections.Generic;
 
-namespace System.Linq
+namespace UniLinq
 {
 #if NET_4_0
 	public interface IGrouping<out TKey, out TElement> : IEnumerable<TElement>

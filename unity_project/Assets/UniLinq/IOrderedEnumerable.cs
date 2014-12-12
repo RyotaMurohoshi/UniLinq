@@ -27,7 +27,7 @@
 //
 using System.Collections.Generic;
 
-namespace System.Linq
+namespace UniLinq
 {
 	public interface IOrderedEnumerable<TElement> : IEnumerable<TElement>
 	{

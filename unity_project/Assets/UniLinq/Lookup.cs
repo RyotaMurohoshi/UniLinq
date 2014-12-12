@@ -32,7 +32,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace System.Linq
+namespace UniLinq
 {
 	public class Lookup<TKey, TElement> : IEnumerable<IGrouping<TKey, TElement>>, ILookup<TKey, TElement>
 	{

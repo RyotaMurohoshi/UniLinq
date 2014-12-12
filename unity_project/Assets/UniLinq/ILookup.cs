@@ -27,7 +27,7 @@
 //
 using System.Collections.Generic;
 
-namespace System.Linq
+namespace UniLinq
 {
 	public interface ILookup<TKey, TElement>: IEnumerable<IGrouping <TKey, TElement>>
 	{

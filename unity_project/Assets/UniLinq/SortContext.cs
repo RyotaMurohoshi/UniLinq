@@ -27,7 +27,7 @@
 //
 using System.Collections.Generic;
 
-namespace System.Linq
+namespace UniLinq
 {
 	abstract class SortContext<TElement> : IComparer<int>
 	{

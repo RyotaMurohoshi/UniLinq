@@ -27,7 +27,7 @@
 //
 using System;
 
-namespace System.Linq
+namespace UniLinq
 {
 	static class Check
 	{

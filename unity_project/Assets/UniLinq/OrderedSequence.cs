@@ -31,7 +31,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace System.Linq
+namespace UniLinq
 {
 	class OrderedSequence<TElement, TKey> : OrderedEnumerable<TElement>
 	{
