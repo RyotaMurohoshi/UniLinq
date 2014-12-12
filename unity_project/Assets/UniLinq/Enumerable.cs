@@ -1443,7 +1443,6 @@ namespace UniLinq
 			return max;
 		}
 
-		// TODO: test nullable and non-nullable
 		public static TSource Max<TSource> (this IEnumerable<TSource> source)
 		{
 			Check.Source (source);
@@ -1675,7 +1674,6 @@ namespace UniLinq
 		{
 			Check.SourceAndSelector (source, selector);
 
-			// TODO: inline
 			return source.Select (selector).Max ();
 		}
 
@@ -2080,7 +2078,6 @@ namespace UniLinq
 		{
 			Check.SourceAndSelector (source, selector);
 
-			// TODO: inline
 			return source.Select (selector).Min ();
 		}
 
