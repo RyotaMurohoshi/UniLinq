@@ -3127,18 +3127,6 @@ namespace UniLinq
 
 		#endregion
 
-		internal static ReadOnlyCollection<TSource> ToReadOnlyCollection<TSource> (this IEnumerable<TSource> source)
-		{
-			if (source == null)
-				return ReadOnlyCollectionOf<TSource>.Empty;
-
-			var ro = source as ReadOnlyCollection<TSource>;
-			if (ro != null)
-				return ro;
-
-			return new ReadOnlyCollection<TSource> (source.ToArray<TSource> ());
-		}
-
 		#region Exception helpers
 
 		static Exception EmptySequence ()
