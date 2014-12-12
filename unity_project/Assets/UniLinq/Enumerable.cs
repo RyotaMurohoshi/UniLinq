@@ -57,16 +57,6 @@ namespace UniLinq
 			public static readonly Func<T, T> Identity = (t) => t;
 		}
 
-		static class EmptyOf<T>
-		{
-			public static readonly T[] Instance = new T [0];
-		}
-
-		static class ReadOnlyCollectionOf<T>
-		{
-			public static readonly ReadOnlyCollection<T> Empty = new ReadOnlyCollection<T> (EmptyOf<T>.Instance);
-		}
-
 		#region Aggregate
 
 		public static TSource Aggregate<TSource> (this IEnumerable<TSource> source, Func<TSource, TSource, TSource> func)
@@ -779,7 +769,7 @@ namespace UniLinq
 
 		public static IEnumerable<TResult> Empty<TResult> ()
 		{
-			return EmptyOf<TResult>.Instance;
+			return new TResult[0];
 		}
 
 		#endregion
@@ -2858,7 +2848,7 @@ namespace UniLinq
 			var collection = source as ICollection<TSource>;
 			if (collection != null) {
 				if (collection.Count == 0)
-					return EmptyOf<TSource>.Instance;
+					return new TSource[0];
 
 				array = new TSource [collection.Count];
 				collection.CopyTo (array, 0);
@@ -2866,7 +2856,7 @@ namespace UniLinq
 			}
 
 			int pos = 0;
-			array = EmptyOf<TSource>.Instance;
+			array = new TSource[0];
 			foreach (var element in source) {
 				if (pos == array.Length) {
 					if (pos == 0)
