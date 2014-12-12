@@ -19,7 +19,6 @@
 // Authors:
 //	Alejandro Serrano "Serras" (trupill@yahoo.es)
 //
-
 using System;
 using System.Collections;
 using System.Collections.Generic;

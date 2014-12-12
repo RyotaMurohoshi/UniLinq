@@ -26,14 +26,14 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace System.Linq {
-
-	abstract class OrderedEnumerable<TElement> : IOrderedEnumerable<TElement> {
+namespace System.Linq
+{
+	abstract class OrderedEnumerable<TElement> : IOrderedEnumerable<TElement>
+	{
 
 		IEnumerable<TElement> source;
 

@@ -26,10 +26,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 using System.Collections.Generic;
 
-namespace System.Linq {
+namespace System.Linq
+{
 #if NET_4_0
 	public interface IGrouping<out TKey, out TElement> : IEnumerable<TElement>
 #else

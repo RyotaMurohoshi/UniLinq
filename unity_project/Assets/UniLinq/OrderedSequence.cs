@@ -27,17 +27,16 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace System.Linq {
-
-	class OrderedSequence<TElement, TKey> : OrderedEnumerable<TElement> {
+namespace System.Linq
+{
+	class OrderedSequence<TElement, TKey> : OrderedEnumerable<TElement>
+	{
 
 		OrderedEnumerable<TElement> parent;
-
 		Func<TElement, TKey> selector;
 		IComparer<TKey> comparer;
 		SortDirection direction;

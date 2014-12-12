@@ -25,11 +25,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 using System.Collections.Generic;
 
-namespace System.Linq {
-
+namespace System.Linq
+{
 	public interface IOrderedEnumerable<TElement> : IEnumerable<TElement>
 	{
 		IOrderedEnumerable<TElement> CreateOrderedEnumerable<TKey> (Func<TElement, TKey> keySelector, IComparer<TKey> comparer, bool descending);

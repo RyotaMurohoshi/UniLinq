@@ -25,12 +25,12 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 using System.Collections.Generic;
 
-namespace System.Linq {
-
-	abstract class SortContext<TElement> : IComparer<int> {
+namespace System.Linq
+{
+	abstract class SortContext<TElement> : IComparer<int>
+	{
 
 		protected SortDirection direction;
 		protected SortContext<TElement> child_context;
@@ -41,7 +41,7 @@ namespace System.Linq {
 			this.child_context = child_context;
 		}
 
-		public abstract void Initialize (TElement [] elements);
+		public abstract void Initialize (TElement[] elements);
 
 		public abstract int Compare (int first_index, int second_index);
 	}

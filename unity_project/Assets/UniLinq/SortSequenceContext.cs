@@ -25,18 +25,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 using System;
 using System.Collections.Generic;
 
-namespace System.Linq {
-
-	class SortSequenceContext<TElement, TKey> : SortContext<TElement> {
+namespace System.Linq
+{
+	class SortSequenceContext<TElement, TKey> : SortContext<TElement>
+	{
 
 		Func<TElement, TKey> selector;
 		IComparer<TKey> comparer;
-
-		TKey [] keys;
+		TKey[] keys;
 
 		public SortSequenceContext (Func<TElement, TKey> selector, IComparer<TKey> comparer, SortDirection direction, SortContext<TElement> child_context)
 			: base (direction, child_context)
@@ -45,7 +44,7 @@ namespace System.Linq {
 			this.comparer = comparer;
 		}
 
-		public override void Initialize (TElement [] elements)
+		public override void Initialize (TElement[] elements)
 		{
 			if (child_context != null)
 				child_context.Initialize (elements);

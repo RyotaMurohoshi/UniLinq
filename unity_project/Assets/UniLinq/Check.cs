@@ -25,12 +25,12 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 using System;
 
-namespace System.Linq {
-
-	static class Check {
+namespace System.Linq
+{
+	static class Check
+	{
 
 		public static void Source (object source)
 		{
@@ -38,7 +38,7 @@ namespace System.Linq {
 				throw new ArgumentNullException ("source");
 		}
 
-		public static void Source1AndSource2 (object source1,object source2)
+		public static void Source1AndSource2 (object source1, object source2)
 		{
 			if (source1 == null)
 				throw new ArgumentNullException ("source1");
@@ -46,7 +46,7 @@ namespace System.Linq {
 				throw new ArgumentNullException ("source2");
 		}
 
-		public static void SourceAndFuncAndSelector ( object source, object func, object selector)
+		public static void SourceAndFuncAndSelector (object source, object func, object selector)
 		{
 			if (source == null)
 				throw new ArgumentNullException ("source");
@@ -55,7 +55,6 @@ namespace System.Linq {
 			if (selector == null)
 				throw new ArgumentNullException ("selector");
 		}
-
 
 		public static void SourceAndFunc (object source, object func)
 		{
@@ -106,6 +105,7 @@ namespace System.Linq {
 			if (elementSelector == null)
 				throw new ArgumentNullException ("elementSelector");
 		}
+
 		public static void SourceAndKeyResultSelectors (object source, object keySelector, object resultSelector)
 		{
 			if (source == null)

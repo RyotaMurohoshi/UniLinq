@@ -30,7 +30,6 @@
 //
 
 // precious: http://www.hookedonlinq.com
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,26 +39,31 @@ namespace System.Linq
 {
 	public static class Enumerable
 	{
-		enum Fallback {
+		enum Fallback
+		{
 			Default,
 			Throw
 		}
 
 #if !FULL_AOT_RUNTIME
-		static class PredicateOf<T> {
+		static class PredicateOf<T>
+		{
 			public static readonly Func<T, bool> Always = (t) => true;
 		}
 #endif
 
-		static class Function<T> {
+		static class Function<T>
+		{
 			public static readonly Func<T, T> Identity = (t) => t;
 		}
-		
-		static class EmptyOf<T> {
+
+		static class EmptyOf<T>
+		{
 			public static readonly T[] Instance = new T [0];
 		}
-		
-		static class ReadOnlyCollectionOf<T> {
+
+		static class ReadOnlyCollectionOf<T>
+		{
 			public static readonly ReadOnlyCollection<T> Empty = new ReadOnlyCollection<T> (EmptyOf<T>.Instance);
 		}
 
@@ -168,13 +172,13 @@ namespace System.Linq
 
 			long total = 0;
 			int count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total = checked (total + element);
 				count++;
 			}
 			if (count == 0)
 				throw EmptySequence ();
-			return total / (double) count;
+			return total / (double)count;
 		}
 
 		public static double Average (this IEnumerable<long> source)
@@ -183,13 +187,13 @@ namespace System.Linq
 
 			long total = 0;
 			long count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total += element;
 				count++;
 			}
 			if (count == 0)
 				throw EmptySequence ();
-			return total / (double) count;
+			return total / (double)count;
 		}
 
 		public static double Average (this IEnumerable<double> source)
@@ -198,7 +202,7 @@ namespace System.Linq
 
 			double total = 0;
 			long count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total += element;
 				count++;
 			}
@@ -213,7 +217,7 @@ namespace System.Linq
 
 			float total = 0;
 			long count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total += element;
 				count++;
 			}
@@ -228,7 +232,7 @@ namespace System.Linq
 
 			decimal total = 0;
 			long count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total += element;
 				count++;
 			}
@@ -267,7 +271,7 @@ namespace System.Linq
 
 			long total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -279,7 +283,7 @@ namespace System.Linq
 			if (counter == 0)
 				return null;
 
-			return new double? (total / (double) counter);
+			return new double? (total / (double)counter);
 		}
 
 		public static double? Average (this IEnumerable<long?> source)
@@ -288,7 +292,7 @@ namespace System.Linq
 
 			long total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -300,7 +304,7 @@ namespace System.Linq
 			if (counter == 0)
 				return null;
 
-			return new double? (total / (double) counter);
+			return new double? (total / (double)counter);
 
 		}
 
@@ -310,7 +314,7 @@ namespace System.Linq
 
 			double total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -332,7 +336,7 @@ namespace System.Linq
 
 			decimal total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -354,7 +358,7 @@ namespace System.Linq
 
 			float total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -376,13 +380,13 @@ namespace System.Linq
 
 			long total = 0;
 			long count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total += selector (element);
 				count++;
 			}
 			if (count == 0)
 				throw EmptySequence ();
-			return total / (double) count;
+			return total / (double)count;
 		}
 
 		public static double? Average<TSource> (this IEnumerable<TSource> source, Func<TSource, int?> selector)
@@ -391,7 +395,7 @@ namespace System.Linq
 
 			long total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				var value = selector (element);
 				if (!value.HasValue)
@@ -404,7 +408,7 @@ namespace System.Linq
 			if (counter == 0)
 				return null;
 
-			return new double? (total / (double) counter);
+			return new double? (total / (double)counter);
 		}
 
 		public static double Average<TSource> (this IEnumerable<TSource> source, Func<TSource, long> selector)
@@ -413,13 +417,13 @@ namespace System.Linq
 
 			long total = 0;
 			long count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total = checked (total + selector (element));
 				count++;
 			}
 			if (count == 0)
 				throw EmptySequence ();
-			return total / (double) count;
+			return total / (double)count;
 
 		}
 
@@ -429,7 +433,7 @@ namespace System.Linq
 
 			long total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				var value = selector (element);
 				if (!value.HasValue)
@@ -442,7 +446,7 @@ namespace System.Linq
 			if (counter == 0)
 				return null;
 
-			return new double? (total / (double) counter);
+			return new double? (total / (double)counter);
 		}
 
 		public static double Average<TSource> (this IEnumerable<TSource> source, Func<TSource, double> selector)
@@ -451,7 +455,7 @@ namespace System.Linq
 
 			double total = 0;
 			long count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total += selector (element);
 				count++;
 			}
@@ -467,7 +471,7 @@ namespace System.Linq
 
 			double total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				var value = selector (element);
 				if (!value.HasValue)
@@ -490,7 +494,7 @@ namespace System.Linq
 
 			float total = 0;
 			long count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total += selector (element);
 				count++;
 			}
@@ -505,7 +509,7 @@ namespace System.Linq
 
 			float total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				var value = selector (element);
 				if (!value.HasValue)
@@ -527,7 +531,7 @@ namespace System.Linq
 
 			decimal total = 0;
 			long count = 0;
-			foreach (var element in source){
+			foreach (var element in source) {
 				total += selector (element);
 				count++;
 			}
@@ -542,7 +546,7 @@ namespace System.Linq
 
 			decimal total = 0;
 			long counter = 0;
-			
+
 			foreach (var element in source) {
 				var value = selector (element);
 				if (!value.HasValue)
@@ -639,7 +643,9 @@ namespace System.Linq
 			int counter = 0;
 			using (var enumerator = source.GetEnumerator ())
 				while (enumerator.MoveNext ())
-					checked { counter++; }
+					checked {
+						counter++;
+					}
 
 			return counter;
 		}
@@ -651,7 +657,9 @@ namespace System.Linq
 			int counter = 0;
 			foreach (var element in source)
 				if (predicate (element))
-					checked { counter++; }
+					checked {
+						counter++;
+					}
 
 			return counter;
 		}
@@ -1235,7 +1243,7 @@ namespace System.Linq
 
 			throw EmptySequence ();
 #endif
-        }
+		}
 
 		public static TSource Last<TSource> (this IEnumerable<TSource> source, Func<TSource, bool> predicate)
 		{
@@ -1290,7 +1298,7 @@ namespace System.Linq
 			Check.Source (source);
 
 #if !NET_2_1
-			var array = source as TSource [];
+			var array = source as TSource[];
 			if (array != null)
 				return array.LongLength;
 #endif
@@ -1325,12 +1333,12 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = int.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (element, max);
 				empty = false;
 			}
 			if (empty)
-				throw EmptySequence();
+				throw EmptySequence ();
 			return max;
 		}
 
@@ -1340,7 +1348,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = long.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (element, max);
 				empty = false;
 			}
@@ -1355,7 +1363,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = double.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (element, max);
 				empty = false;
 			}
@@ -1370,7 +1378,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = float.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (element, max);
 				empty = false;
 			}
@@ -1385,7 +1393,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = decimal.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (element, max);
 				empty = false;
 			}
@@ -1400,7 +1408,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = int.MinValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1421,7 +1429,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = long.MinValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1442,7 +1450,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = double.MinValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1463,7 +1471,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = float.MinValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1484,7 +1492,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = decimal.MinValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1507,8 +1515,8 @@ namespace System.Linq
 			var comparer = Comparer<TSource>.Default;
 
 			TSource max = default (TSource);
-			
-			if (default (TSource) == null){
+
+			if (default (TSource) == null) {
 				foreach (var element in source) {
 					if (element == null)
 						continue;
@@ -1519,7 +1527,7 @@ namespace System.Linq
 			} else {
 				bool empty = true;
 				foreach (var element in source) {
-					if (empty){
+					if (empty) {
 						max = element;
 						empty = false;
 						continue;
@@ -1539,7 +1547,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = int.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (selector (element), max);
 				empty = false;
 			}
@@ -1554,7 +1562,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = long.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (selector (element), max);
 				empty = false;
 			}
@@ -1569,7 +1577,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = double.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (selector (element), max);
 				empty = false;
 			}
@@ -1584,7 +1592,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = float.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (selector (element), max);
 				empty = false;
 			}
@@ -1599,7 +1607,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var max = decimal.MinValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				max = Math.Max (selector (element), max);
 				empty = false;
 			}
@@ -1745,7 +1753,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = int.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (element, min);
 				empty = false;
 			}
@@ -1760,7 +1768,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = long.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (element, min);
 				empty = false;
 			}
@@ -1775,7 +1783,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = double.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (element, min);
 				empty = false;
 			}
@@ -1790,7 +1798,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = float.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (element, min);
 				empty = false;
 			}
@@ -1805,7 +1813,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = decimal.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (element, min);
 				empty = false;
 			}
@@ -1820,7 +1828,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = int.MaxValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1841,7 +1849,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = long.MaxValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1862,7 +1870,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = double.MaxValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1883,7 +1891,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = float.MaxValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1904,7 +1912,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = decimal.MaxValue;
-				
+
 			foreach (var element in source) {
 				if (!element.HasValue)
 					continue;
@@ -1926,8 +1934,8 @@ namespace System.Linq
 			var comparer = Comparer<TSource>.Default;
 
 			TSource min = default (TSource);
-			
-			if (default (TSource) == null){
+
+			if (default (TSource) == null) {
 				foreach (var element in source) {
 					if (element == null)
 						continue;
@@ -1938,7 +1946,7 @@ namespace System.Linq
 			} else {
 				bool empty = true;
 				foreach (var element in source) {
-					if (empty){
+					if (empty) {
 						min = element;
 						empty = false;
 						continue;
@@ -1958,7 +1966,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = int.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (selector (element), min);
 				empty = false;
 			}
@@ -1973,7 +1981,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = long.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (selector (element), min);
 				empty = false;
 			}
@@ -1988,7 +1996,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = double.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (selector (element), min);
 				empty = false;
 			}
@@ -2003,7 +2011,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = float.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (selector (element), min);
 				empty = false;
 			}
@@ -2018,7 +2026,7 @@ namespace System.Linq
 
 			bool empty = true;
 			var min = decimal.MaxValue;
-			foreach (var element in source){
+			foreach (var element in source) {
 				min = Math.Min (selector (element), min);
 				empty = false;
 			}
@@ -2155,7 +2163,7 @@ namespace System.Linq
 		{
 			foreach (object element in source)
 				if (element is TResult)
-					yield return (TResult) element;
+					yield return (TResult)element;
 		}
 
 		#endregion
@@ -2204,7 +2212,7 @@ namespace System.Linq
 			if (count < 0)
 				throw new ArgumentOutOfRangeException ("count");
 
-			if (((long) start + count) - 1L > int.MaxValue)
+			if (((long)start + count) - 1L > int.MaxValue)
 				throw new ArgumentOutOfRangeException ();
 
 			return CreateRangeIterator (start, count);
@@ -2403,7 +2411,7 @@ namespace System.Linq
 
 			return item;
 #endif
-        }
+		}
 
 		public static TSource Single<TSource> (this IEnumerable<TSource> source, Func<TSource, bool> predicate)
 		{
@@ -2436,7 +2444,7 @@ namespace System.Linq
 
 			return item;
 #endif
-        }
+		}
 
 		public static TSource SingleOrDefault<TSource> (this IEnumerable<TSource> source, Func<TSource, bool> predicate)
 		{
@@ -2492,9 +2500,9 @@ namespace System.Linq
 					yield return element;
 				else
 					if (!predicate (element)) {
-						yield return element;
-						yield = true;
-					}
+					yield return element;
+					yield = true;
+				}
 			}
 		}
 
@@ -2515,9 +2523,9 @@ namespace System.Linq
 					yield return element;
 				else
 					if (!predicate (element, counter)) {
-						yield return element;
-						yield = true;
-					}
+					yield return element;
+					yield = true;
+				}
 				counter++;
 			}
 		}
@@ -2530,7 +2538,7 @@ namespace System.Linq
 		{
 			Check.Source (source);
 			int total = 0;
-			
+
 			foreach (var element in source)
 				total = checked (total + element);
 			return total;
@@ -2577,7 +2585,7 @@ namespace System.Linq
 			Check.Source (source);
 
 			long total = 0;
-			
+
 			foreach (var element in source)
 				total = checked (total + element);
 			return total;
@@ -2623,7 +2631,7 @@ namespace System.Linq
 			Check.Source (source);
 
 			double total = 0;
-			
+
 			foreach (var element in source)
 				total = checked (total + element);
 			return total;
@@ -2646,7 +2654,7 @@ namespace System.Linq
 			Check.SourceAndSelector (source, selector);
 
 			double total = 0;
-			
+
 			foreach (var element in source)
 				total = checked (total + selector (element));
 			return total;
@@ -2670,7 +2678,7 @@ namespace System.Linq
 			Check.Source (source);
 
 			float total = 0;
-			
+
 			foreach (var element in source)
 				total = checked (total + element);
 			return total;
@@ -2715,7 +2723,7 @@ namespace System.Linq
 		{
 			Check.Source (source);
 			decimal total = 0;
-			
+
 			foreach (var element in source)
 				total = checked (total + element);
 			return total;
@@ -2738,7 +2746,7 @@ namespace System.Linq
 		{
 			Check.SourceAndSelector (source, selector);
 			decimal total = 0;
-			
+
 			foreach (var element in source)
 				total = checked (total + selector (element));
 			return total;
@@ -2881,7 +2889,7 @@ namespace System.Linq
 			if (collection != null) {
 				if (collection.Count == 0)
 					return EmptyOf<TSource>.Instance;
-				
+
 				array = new TSource [collection.Count];
 				collection.CopyTo (array, 0);
 				return array;
@@ -2897,12 +2905,12 @@ namespace System.Linq
 						Array.Resize (ref array, pos * 2);
 				}
 
-				array[pos++] = element;
+				array [pos++] = element;
 			}
 
 			if (pos != array.Length)
 				Array.Resize (ref array, pos);
-			
+
 			return array;
 		}
 
@@ -2978,17 +2986,17 @@ namespace System.Linq
 			Check.SourceAndKeyElementSelectors (source, keySelector, elementSelector);
 
 			List<TElement> nullKeyElements = null;
-			
+
 			var dictionary = new Dictionary<TKey, List<TElement>> (comparer ?? EqualityComparer<TKey>.Default);
 			foreach (var element in source) {
 				var key = keySelector (element);
 
 				List<TElement> list;
-				
+
 				if (key == null) {
 					if (nullKeyElements == null)
 						nullKeyElements = new List<TElement> ();
-					
+
 					list = nullKeyElements;
 				} else if (!dictionary.TryGetValue (key, out list)) {
 					list = new List<TElement> ();
@@ -3072,19 +3080,19 @@ namespace System.Linq
 		}
 
 		#endregion
-		
+
 #if NET_4_0
 		#region Zip
-		
+
 		public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult> (this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
 		{
 			Check.FirstAndSecond (first, second);
 			if (resultSelector == null)
 				throw new ArgumentNullException ("resultSelector");
-				
+
 			return CreateZipIterator (first, second, resultSelector);
 		}
-		
+
 		static IEnumerable<TResult> CreateZipIterator<TFirst, TSecond, TResult> (IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> selector)
 		{
 			using (IEnumerator<TFirst> first_enumerator = first.GetEnumerator ()) {
@@ -3096,9 +3104,9 @@ namespace System.Linq
 				}
 			}
 		}
-		
+
 		#endregion
-#endif		
+#endif
 
 		#region Where
 
@@ -3128,7 +3136,7 @@ namespace System.Linq
 				if (predicate (element))
 					yield return element;
 			}
-		}	
+		}
 
 		public static IEnumerable<TSource> Where<TSource> (this IEnumerable<TSource> source, Func<TSource, int, bool> predicate)
 		{
@@ -3180,14 +3188,17 @@ namespace System.Linq
 		{
 			return new InvalidOperationException (Locale.GetText ("Sequence contains no elements"));
 		}
+
 		static Exception NoMatchingElement ()
 		{
 			return new InvalidOperationException (Locale.GetText ("Sequence contains no matching element"));
 		}
+
 		static Exception MoreThanOneElement ()
 		{
 			return new InvalidOperationException (Locale.GetText ("Sequence contains more than one element"));
 		}
+
 		static Exception MoreThanOneMatchingElement ()
 		{
 			return new InvalidOperationException (Locale.GetText ("Sequence contains more than one matching element"));

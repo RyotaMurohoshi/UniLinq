@@ -25,15 +25,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 using System.Collections.Generic;
 
-namespace System.Linq {
-
-	public interface ILookup<TKey, TElement>: IEnumerable<IGrouping <TKey, TElement>> {
+namespace System.Linq
+{
+	public interface ILookup<TKey, TElement>: IEnumerable<IGrouping <TKey, TElement>>
+	{
 
 		int Count { get; }
-		IEnumerable<TElement> this [TKey key] { get; }
+
+		IEnumerable<TElement> this [TKey key] { get;
+		}
 
 		bool Contains (TKey key);
 	}

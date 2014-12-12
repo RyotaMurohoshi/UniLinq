@@ -28,15 +28,14 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace System.Linq {
-
-	public class Lookup<TKey, TElement> : IEnumerable<IGrouping<TKey, TElement>>, ILookup<TKey, TElement> {
+namespace System.Linq
+{
+	public class Lookup<TKey, TElement> : IEnumerable<IGrouping<TKey, TElement>>, ILookup<TKey, TElement>
+	{
 
 		IGrouping<TKey, TElement> nullGrouping;
 		Dictionary<TKey, IGrouping<TKey, TElement>> groups;
@@ -54,7 +53,7 @@ namespace System.Linq {
 					if (groups.TryGetValue (key, out group))
 						return group;
 				}
-				
+
 				return new TElement [0];
 			}
 		}
@@ -64,7 +63,7 @@ namespace System.Linq {
 			groups = new Dictionary<TKey, IGrouping<TKey, TElement>> (lookup.Comparer);
 			foreach (var slot in lookup)
 				groups.Add (slot.Key, new Grouping<TKey, TElement> (slot.Key, slot.Value));
-			
+
 			if (nullKeyElements != null)
 				nullGrouping = new Grouping<TKey, TElement> (default (TKey), nullKeyElements);
 		}
@@ -73,21 +72,21 @@ namespace System.Linq {
 		{
 			if (nullGrouping != null)
 				yield return resultSelector (nullGrouping.Key, nullGrouping);
-			
+
 			foreach (var group in groups.Values)
 				yield return resultSelector (group.Key, group);
 		}
 
 		public bool Contains (TKey key)
-		{	
-			return (key != null) ? groups.ContainsKey (key) : nullGrouping != null; 
+		{
+			return (key != null) ? groups.ContainsKey (key) : nullGrouping != null;
 		}
 
 		public IEnumerator<IGrouping<TKey, TElement>> GetEnumerator ()
 		{
 			if (nullGrouping != null)
 				yield return nullGrouping;
-			
+
 			foreach (var g in groups.Values)
 				yield return g;
 		}
