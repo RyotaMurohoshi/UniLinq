@@ -41,7 +41,12 @@ namespace UniLinq
 
 		QuickSort (IEnumerable<TElement> source, SortContext<TElement> context)
 		{
-			this.elements = source.ToArray ();
+			List<TElement> temp = new List<TElement>();
+			foreach (TElement element in source) {
+				temp.Add (element);
+			}
+
+			this.elements = temp.ToArray ();
 			this.indexes = CreateIndexes (elements.Length);
 			this.context = context;
 		}
