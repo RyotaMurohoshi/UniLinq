@@ -45,11 +45,6 @@ namespace UniLinq
 			Throw
 		}
 
-		static class Function<T>
-		{
-			public static readonly Func<T, T> Identity = (t) => t;
-		}
-
 		#region Aggregate
 
 		public static TSource Aggregate<TSource> (this IEnumerable<TSource> source, Func<TSource, TSource, TSource> func)
@@ -2880,9 +2875,17 @@ namespace UniLinq
 		public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey> (this IEnumerable<TSource> source,
 				Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
 		{
-			return ToDictionary<TSource, TKey, TSource> (source, keySelector, Function<TSource>.Identity, comparer);
-		}
+			Check.SourceAndKeySelector (source, keySelector);
 
+			if (comparer == null)
+				comparer = EqualityComparer<TKey>.Default;
+
+			var dict = new Dictionary<TKey, TSource> (comparer);
+			foreach (var e in source)
+				dict.Add (keySelector (e), e);
+
+			return dict;
+		}
 		#endregion
 
 		#region ToList
@@ -2898,13 +2901,35 @@ namespace UniLinq
 
 		public static ILookup<TKey, TSource> ToLookup<TSource, TKey> (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
 		{
-			return ToLookup<TSource, TKey, TSource> (source, keySelector, Function<TSource>.Identity, null);
+			return ToLookup<TSource, TKey> (source, keySelector, null);
 		}
 
 		public static ILookup<TKey, TSource> ToLookup<TSource, TKey> (this IEnumerable<TSource> source,
 			Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
 		{
-			return ToLookup<TSource, TKey, TSource> (source, keySelector, Function<TSource>.Identity, comparer);
+			Check.SourceAndKeySelector (source, keySelector);
+			List<TSource> nullKeyElements = null;
+
+			var dictionary = new Dictionary<TKey, List<TSource>> (comparer ?? EqualityComparer<TKey>.Default);
+			foreach (var element in source) {
+				var key = keySelector (element);
+
+				List<TSource> list;
+
+				if (key == null) {
+					if (nullKeyElements == null)
+						nullKeyElements = new List<TSource> ();
+
+					list = nullKeyElements;
+				} else if (!dictionary.TryGetValue (key, out list)) {
+					list = new List<TSource> ();
+					dictionary.Add (key, list);
+				}
+
+				list.Add (element);
+			}
+
+			return new Lookup<TKey, TSource> (dictionary, nullKeyElements);
 		}
 
 		public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement> (this IEnumerable<TSource> source,
