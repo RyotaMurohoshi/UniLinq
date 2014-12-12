@@ -45,13 +45,6 @@ namespace UniLinq
 			Throw
 		}
 
-#if !FULL_AOT_RUNTIME
-		static class PredicateOf<T>
-		{
-			public static readonly Func<T, bool> Always = (t) => true;
-		}
-#endif
-
 		static class Function<T>
 		{
 			public static readonly Func<T, T> Identity = (t) => t;
@@ -849,15 +842,11 @@ namespace UniLinq
 		{
 			Check.Source (source);
 
-#if !FULL_AOT_RUNTIME
-			return source.First (PredicateOf<TSource>.Always, Fallback.Default);
-#else
 			// inline the code to reduce dependency o generic causing AOT errors on device (e.g. bug #3285)
 			foreach (var element in source)
 				return element;
 
 			return default (TSource);
-#endif
 		}
 
 		public static TSource FirstOrDefault<TSource> (this IEnumerable<TSource> source, Func<TSource, bool> predicate)
@@ -1189,9 +1178,6 @@ namespace UniLinq
 			if (list != null)
 				return list [list.Count - 1];
 
-#if !FULL_AOT_RUNTIME
-			return source.Last (PredicateOf<TSource>.Always, Fallback.Throw);
-#else
 			var empty = true;
 			var item = default (TSource);
 
@@ -1204,7 +1190,6 @@ namespace UniLinq
 				return item;
 
 			throw EmptySequence ();
-#endif
 		}
 
 		public static TSource Last<TSource> (this IEnumerable<TSource> source, Func<TSource, bool> predicate)
@@ -1226,9 +1211,6 @@ namespace UniLinq
 			if (list != null)
 				return list.Count > 0 ? list [list.Count - 1] : default (TSource);
 
-#if !FULL_AOT_RUNTIME
-			return source.Last (PredicateOf<TSource>.Always, Fallback.Default);
-#else
 			var empty = true;
 			var item = default (TSource);
 
@@ -1241,7 +1223,6 @@ namespace UniLinq
 				return item;
 
 			return item;
-#endif
 		}
 
 		public static TSource LastOrDefault<TSource> (this IEnumerable<TSource> source, Func<TSource, bool> predicate)
@@ -2352,9 +2333,6 @@ namespace UniLinq
 		{
 			Check.Source (source);
 
-#if !FULL_AOT_RUNTIME
-			return source.Single (PredicateOf<TSource>.Always, Fallback.Throw);
-#else
 			var found = false;
 			var item = default (TSource);
 
@@ -2370,7 +2348,6 @@ namespace UniLinq
 				throw NoMatchingElement ();
 
 			return item;
-#endif
 		}
 
 		public static TSource Single<TSource> (this IEnumerable<TSource> source, Func<TSource, bool> predicate)
@@ -2388,9 +2365,6 @@ namespace UniLinq
 		{
 			Check.Source (source);
 
-#if !FULL_AOT_RUNTIME
-			return source.Single (PredicateOf<TSource>.Always, Fallback.Default);
-#else
 			var found = false;
 			var item = default (TSource);
 
@@ -2403,7 +2377,6 @@ namespace UniLinq
 			}
 
 			return item;
-#endif
 		}
 
 		public static TSource SingleOrDefault<TSource> (this IEnumerable<TSource> source, Func<TSource, bool> predicate)
