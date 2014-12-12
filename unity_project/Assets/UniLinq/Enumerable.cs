@@ -3186,22 +3186,22 @@ namespace UniLinq
 
 		static Exception EmptySequence ()
 		{
-			return new InvalidOperationException (Locale.GetText ("Sequence contains no elements"));
+			return new InvalidOperationException ("Sequence contains no elements");
 		}
 
 		static Exception NoMatchingElement ()
 		{
-			return new InvalidOperationException (Locale.GetText ("Sequence contains no matching element"));
+			return new InvalidOperationException ("Sequence contains no matching element");
 		}
 
 		static Exception MoreThanOneElement ()
 		{
-			return new InvalidOperationException (Locale.GetText ("Sequence contains more than one element"));
+			return new InvalidOperationException ("Sequence contains more than one element");
 		}
 
 		static Exception MoreThanOneMatchingElement ()
 		{
-			return new InvalidOperationException (Locale.GetText ("Sequence contains more than one matching element"));
+			return new InvalidOperationException ("Sequence contains more than one matching element");
 		}
 
 		#endregion
