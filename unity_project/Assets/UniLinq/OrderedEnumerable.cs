@@ -47,7 +47,7 @@ namespace UniLinq
 			return GetEnumerator ();
 		}
 
-		public IEnumerator<TElement> GetEnumerator ()
+		public virtual IEnumerator<TElement> GetEnumerator ()
 		{
 			return Sort (source).GetEnumerator ();
 		}

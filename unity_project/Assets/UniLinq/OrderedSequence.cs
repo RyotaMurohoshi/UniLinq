@@ -55,6 +55,11 @@ namespace UniLinq
 			this.parent = parent;
 		}
 
+		public override IEnumerator<TElement> GetEnumerator ()
+		{
+			return base.GetEnumerator ();
+		}
+
 		public override SortContext<TElement> CreateContext (SortContext<TElement> current)
 		{
 			SortContext<TElement> context = new SortSequenceContext<TElement, TKey> (selector, comparer, direction, current);
