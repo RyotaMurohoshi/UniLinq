@@ -2772,13 +2772,8 @@ namespace UniLinq
 		{
 			Check.SourceAndKeySelector (source, keySelector);
 
-#if FULL_AOT_RUNTIME
-			var oe = source as OrderedEnumerable <TSource>;
-			if (oe != null)
-				return oe.CreateOrderedEnumerable (keySelector, comparer, false);
-#endif
-
-			return source.CreateOrderedEnumerable (keySelector, comparer, false);
+			var orderedEnumerable = source as OrderedEnumerable <TSource>;
+			return orderedEnumerable.CreateOrderedEnumerable (keySelector, comparer, false);
 		}
 
 		#endregion
@@ -2796,12 +2791,8 @@ namespace UniLinq
 		{
 			Check.SourceAndKeySelector (source, keySelector);
 
-#if FULL_AOT_RUNTIME
-			var oe = source as OrderedEnumerable <TSource>;
-			if (oe != null)
-				return oe.CreateOrderedEnumerable (keySelector, comparer, true);
-#endif
-			return source.CreateOrderedEnumerable (keySelector, comparer, true);
+			var orderedEnumerable = source as OrderedEnumerable <TSource>;
+			return orderedEnumerable.CreateOrderedEnumerable (keySelector, comparer, true);
 		}
 
 		#endregion
