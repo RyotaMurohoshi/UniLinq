@@ -1097,14 +1097,6 @@ namespace UniLinq
 			IEqualityComparer<TKey> comparer)
 		{
 			ILookup<TKey, TInner> innerKeys = ToLookup<TInner, TKey> (inner, innerKeySelector, comparer);
-			/*Dictionary<K, List<U>> innerKeys = new Dictionary<K, List<U>> ();
-			foreach (U element in inner)
-			{
-					K innerKey = innerKeySelector (element);
-					if (!innerKeys.ContainsKey (innerKey))
-							innerKeys.Add (innerKey, new List<U> ());
-					innerKeys[innerKey].Add (element);
-			}*/
 
 			foreach (TOuter element in outer) {
 				TKey outerKey = outerKeySelector (element);
@@ -1164,14 +1156,6 @@ namespace UniLinq
 			Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector, IEqualityComparer<TKey> comparer)
 		{
 			ILookup<TKey, TInner> innerKeys = ToLookup<TInner, TKey> (inner, innerKeySelector, comparer);
-			/*Dictionary<K, List<U>> innerKeys = new Dictionary<K, List<U>> ();
-			foreach (U element in inner)
-			{
-					K innerKey = innerKeySelector (element);
-					if (!innerKeys.ContainsKey (innerKey))
-							innerKeys.Add (innerKey, new List<U> ());
-					innerKeys[innerKey].Add (element);
-			}*/
 
 			foreach (TOuter element in outer) {
 				TKey outerKey = outerKeySelector (element);
