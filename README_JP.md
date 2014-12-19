@@ -10,7 +10,7 @@ Unity上でAOTコンパイル関連のエラーを回避し、LINQ to Objectsを
 
 例えば、次の`Average`メソッドは、
 
-```csharp:
+```csharp
 double average = new string[]{"Up", "Down", "Right", "Left"}.Average (it => it.Length);
 ```
 
