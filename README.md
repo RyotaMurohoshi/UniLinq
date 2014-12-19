@@ -10,7 +10,7 @@ Class library for LINQ to Objects on Unity GameEngine without Exceptions related
 
 For example, next `Average` method 
 
-```csharp:
+```csharp
 double average = new string[]{"Up", "Down", "Right", "Left"}.Average (it => it.Length);
 ```
 
