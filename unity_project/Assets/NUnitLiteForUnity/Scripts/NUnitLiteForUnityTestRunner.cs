@@ -21,8 +21,7 @@ namespace NUnitLiteForUnity
 		{
 			ITestAssemblyRunner testRunner = new NUnitLiteTestAssemblyRunner (new NUnitLiteTestAssemblyBuilder ());
 
-			Assembly assembly = Assembly.GetCallingAssembly ();
-
+			Assembly assembly = AssemblyGetter.Assembly;
 			bool hasTestLoaded = testRunner.Load (assembly: assembly, settings: new Hashtable ());
 			if (!hasTestLoaded) {
 				Debug.Log (string.Format ("No tests found in assembly {0}", assembly.GetName ().Name));
