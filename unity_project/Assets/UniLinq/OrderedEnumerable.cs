@@ -32,7 +32,7 @@ using System.Collections.Generic;
 
 namespace UniLinq
 {
-	abstract class OrderedEnumerable<TElement> : IOrderedEnumerable<TElement>
+	public class OrderedEnumerable<TElement> : IEnumerable<TElement>, IEnumerable
 	{
 
 		IEnumerable<TElement> source;
@@ -52,11 +52,15 @@ namespace UniLinq
 			return Sort (source).GetEnumerator ();
 		}
 
-		public abstract SortContext<TElement> CreateContext (SortContext<TElement> current);
+		public virtual SortContext<TElement> CreateContext (SortContext<TElement> current) {
+			return current;
+		}
 
-		protected abstract IEnumerable<TElement> Sort (IEnumerable<TElement> source);
+		protected virtual IEnumerable<TElement> Sort (IEnumerable<TElement> source) {
+			return source;
+		}
 
-		public IOrderedEnumerable<TElement> CreateOrderedEnumerable<TKey> (
+		public OrderedEnumerable<TElement> CreateOrderedEnumerable<TKey> (
 			Func<TElement, TKey> selector, IComparer<TKey> comparer, bool descending)
 		{
 			return new OrderedSequence<TElement, TKey> (this, source, selector, comparer,

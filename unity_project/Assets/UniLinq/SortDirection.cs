@@ -28,7 +28,7 @@
 
 namespace UniLinq
 {
-	enum SortDirection
+	public enum SortDirection
 	{
 		Ascending,
 		Descending

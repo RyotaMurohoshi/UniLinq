@@ -29,7 +29,7 @@ using System.Collections.Generic;
 
 namespace UniLinq
 {
-	abstract class SortContext<TElement> : IComparer<int>
+	public abstract class SortContext<TElement> : IComparer<int>
 	{
 
 		protected SortDirection direction;

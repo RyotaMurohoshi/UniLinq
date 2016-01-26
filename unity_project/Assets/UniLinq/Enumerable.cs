@@ -2103,13 +2103,13 @@ namespace UniLinq
 
 		#region OrderBy
 
-		public static IOrderedEnumerable<TSource> OrderBy<TSource, TKey> (this IEnumerable<TSource> source,
+		public static OrderedEnumerable<TSource> OrderBy<TSource, TKey> (this IEnumerable<TSource> source,
 				Func<TSource, TKey> keySelector)
 		{
 			return OrderBy<TSource, TKey> (source, keySelector, null);
 		}
 
-		public static IOrderedEnumerable<TSource> OrderBy<TSource, TKey> (this IEnumerable<TSource> source,
+		public static OrderedEnumerable<TSource> OrderBy<TSource, TKey> (this IEnumerable<TSource> source,
 				Func<TSource, TKey> keySelector,
 				IComparer<TKey> comparer)
 		{
@@ -2122,13 +2122,13 @@ namespace UniLinq
 
 		#region OrderByDescending
 
-		public static IOrderedEnumerable<TSource> OrderByDescending<TSource, TKey> (this IEnumerable<TSource> source,
+		public static OrderedEnumerable<TSource> OrderByDescending<TSource, TKey> (this IEnumerable<TSource> source,
 				Func<TSource, TKey> keySelector)
 		{
 			return OrderByDescending<TSource, TKey> (source, keySelector, null);
 		}
 
-		public static IOrderedEnumerable<TSource> OrderByDescending<TSource, TKey> (this IEnumerable<TSource> source,
+		public static OrderedEnumerable<TSource> OrderByDescending<TSource, TKey> (this IEnumerable<TSource> source,
 				Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
 		{
 			Check.SourceAndKeySelector (source, keySelector);
@@ -2759,12 +2759,12 @@ namespace UniLinq
 
 		#region ThenBy
 
-		public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey> (this IOrderedEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+		public static OrderedEnumerable<TSource> ThenBy<TSource, TKey> (this OrderedEnumerable<TSource> source, Func<TSource, TKey> keySelector)
 		{
 			return ThenBy<TSource, TKey> (source, keySelector, null);
 		}
 
-		public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey> (this IOrderedEnumerable<TSource> source,
+		public static OrderedEnumerable<TSource> ThenBy<TSource, TKey> (this OrderedEnumerable<TSource> source,
 			Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
 		{
 			Check.SourceAndKeySelector (source, keySelector);
@@ -2777,13 +2777,13 @@ namespace UniLinq
 
 		#region ThenByDescending
 
-		public static IOrderedEnumerable<TSource> ThenByDescending<TSource, TKey> (this IOrderedEnumerable<TSource> source,
+		public static OrderedEnumerable<TSource> ThenByDescending<TSource, TKey> (this OrderedEnumerable<TSource> source,
 			Func<TSource, TKey> keySelector)
 		{
 			return ThenByDescending<TSource, TKey> (source, keySelector, null);
 		}
 
-		public static IOrderedEnumerable<TSource> ThenByDescending<TSource, TKey> (this IOrderedEnumerable<TSource> source,
+		public static OrderedEnumerable<TSource> ThenByDescending<TSource, TKey> (this OrderedEnumerable<TSource> source,
 			Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
 		{
 			Check.SourceAndKeySelector (source, keySelector);
