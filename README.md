@@ -59,7 +59,7 @@ And you can write `LINQ to objects` codes that are equivalent to codes with Syst
 
 UniLinq is based on [mono/mono](https://github.com/mono/mono/tree/mono-3.10.0) (tag:mono-3.10.0) System.Linq namespace [source codes](https://github.com/mono/mono/tree/mono-3.10.0/mcs/class/System.Core/System.Linq). They are under the MIT License.
 
-Many problesms related AOT compile has already fixed at original mono/mono. But Unity GameEngine is based on very old mono, so there are many problem related to AOT compile yet.
+Many problesms related AOT compile has already fixed at original mono/mono. But Unity GameEngine is based on very old mono, so there are many problems related to AOT compile yet.
 
 UniLinq is based on newer mono/mono System.Linq classes and interfaces source codes. Not only source codes but also compiler has enhanced on original newer mono/mono, some codes are changed from mono/mono to avoid problem related AOT compile additonaly.
 
